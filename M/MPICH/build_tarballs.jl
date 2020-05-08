@@ -56,6 +56,7 @@ fi
     --enable-static=no \
     --disable-dependency-tracking \
     --docdir=/tmp \
+    --enable-fast=O3 \
     "${EXTRA_FLAGS[@]}"
 
 # Build the library
