@@ -1,0 +1,11 @@
+--- a/mfhdf/libsrc/Makefile.in
++++ b/mfhdf/libsrc/Makefile.in
+@@ -440,7 +440,7 @@
+ @HDF_BUILD_NETCDF_TRUE@FSOURCES = $(top_builddir)/mfhdf/fortran/jackets.c $(top_srcdir)/mfhdf/fortran/mfsdf.c $(top_srcdir)/mfhdf/fortran/mfsdff.f
+ @HDF_BUILD_FORTRAN_FALSE@libmfhdf_la_SOURCES = $(CSOURCES)
+ @HDF_BUILD_FORTRAN_TRUE@libmfhdf_la_SOURCES = $(CSOURCES) $(FSOURCES)
+-libmfhdf_la_LIBADD = $(XDRLIB)
++libmfhdf_la_LIBADD = $(XDRLIB) $(LIBHDF)
+ @HDF_BUILD_NETCDF_FALSE@include_HEADERS = hdf2netcdf.h local_nc.h mfhdf.h hdf4_netcdf.h mfhdfi.h mfdatainfo.h
+ @HDF_BUILD_NETCDF_TRUE@include_HEADERS = hdf2netcdf.h local_nc.h mfhdf.h netcdf.h mfhdfi.h mfdatainfo.h
+ @HDF_BUILD_FORTRAN_FALSE@F77LINK = $(LINK)
