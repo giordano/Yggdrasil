@@ -58,7 +58,7 @@ SYMBOL_DEFS+=(${SYMBOL_DEFS[@]^^})
 
 FFLAGS="${FFLAGS} -O3 -fPIE -ffixed-line-length-none -fno-optimize-sibling-calls -cpp"
 LIBOPENBLAS=openblas
-if [[ ${nbits} == 64 ]] && [[ ${target} != aarch64* ]]; then
+if [[ ${nbits} == 64 ]]; then
     LIBOPENBLAS=openblas64_
     FFLAGS="${FFLAGS} -fdefault-integer-8 ${SYMBOL_DEFS[@]}"
 fi
@@ -89,7 +89,7 @@ fi
 # platforms are passed in on the command line.  We enable the full
 # combinatorial explosion of GCC versions because this package most
 # definitely links against libgfortran.
-platforms = expand_gfortran_versions(supported_platforms())
+platforms = expand_gfortran_versions(supported_platforms(; experimental=true))
 
 # The products that we will ensure are always built
 products = [
@@ -103,5 +103,4 @@ dependencies = [
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; preferred_gcc_version=v"6")
-
+build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; preferred_gcc_version=v"6", julia_compat="1.6")
