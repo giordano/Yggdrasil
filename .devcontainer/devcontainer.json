@@ -4,5 +4,10 @@
     ],
     "runArgs": ["--privileged"],
     "dockerFile": "Dockerfile",
-    "onCreateCommand": "julia --project=.ci -e 'using Pkg; Pkg.instantiate(); Pkg.precompile();'"
+    "onCreateCommand": [
+	// "julia --project=.ci -e 'using Pkg; Pkg.instantiate(); Pkg.precompile();'",
+	"mkdir -p $(dirname $(julia -e 'print(Base.active_project())'))",
+	// "cp .ci/{Project,Manifest}.toml $(dirname $(julia -e 'print(Base.active_project())'))/.",
+	// "julia -e 'using Pkg; Pkg.instantiate(); Pkg.precompile();'"
+    ]
 }
