@@ -10,19 +10,24 @@ delete!(Pkg.Types.get_last_stdlibs(v"1.6.3"), uuid)
 name = "libcxxwrap_julia"
 version = v"0.9.3"
 
-julia_versions = [v"1.6.3", v"1.7", v"1.8", v"1.9", v"1.10"]
+julia_versions = [v"1.6.3"]
 
-is_yggdrasil = haskey(ENV, "BUILD_BUILDNUMBER")
+is_yggdrasil = true # haskey(ENV, "BUILD_BUILDNUMBER")
 git_repo = is_yggdrasil ? "https://github.com/JuliaInterop/libcxxwrap-julia.git" : joinpath(ENV["HOME"], "src/julia/libcxxwrap-julia/")
 unpack_target = is_yggdrasil ? "" : "libcxxwrap-julia"
 
 # Collection of sources required to complete build
 sources = [
     GitSource(git_repo, "277bec8dae5b84717d2068b4e1f7b8ca8fe64a25", unpack_target=unpack_target),
+    DirectorySource("./bundled"),
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
+pushd libcxxwrap-julia
+atomic_patch -p1 ../patches/cxx-ipu.patch
+popd
+
 mkdir build
 cd build
 
@@ -56,5 +61,4 @@ dependencies = [
 
 # Build the tarballs, and possibly a `build.jl` as well.
 build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies;
-    preferred_gcc_version = v"9", julia_compat = "1.6")
-
+    preferred_gcc_version = v"10", julia_compat = "1.6")
