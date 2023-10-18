@@ -3,12 +3,12 @@
 using BinaryBuilder
 
 name = "Pango"
-version = v"1.50.14"
+version = v"1.51.0"
 
 # Collection of sources required to build Pango
 sources = [
     ArchiveSource("http://ftp.gnome.org/pub/GNOME/sources/pango/$(version.major).$(version.minor)/pango-$(version).tar.xz",
-                  "1d67f205bfc318c27a29cfdfb6828568df566795df0cb51d2189cde7f2d581e8"),
+                  "74efc109ae6f903bbe6af77eaa2ac6094b8ee245a2e23f132a7a8f0862d1a9f5"),
     DirectorySource("./bundled"),
     ArchiveSource("https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/mingw-w64-v11.0.0.tar.bz2",
                   "bd0ea1633bd830204cc23a696889335e9d4a32b8619439ee17f22188695fcc5f"),
