@@ -40,6 +40,7 @@ pip3 install gi-docgen
 mkdir build && cd build
 meson --cross-file="${MESON_TARGET_TOOLCHAIN}" \
     -Dintrospection=disabled \
+    -Dfreetype=enabled \
     ..
 ninja -j${nproc}
 ninja install
@@ -60,9 +61,9 @@ products = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    Dependency("Cairo_jll"; compat="1.16.1"),
+    Dependency("Cairo_jll"; compat="1.18.0"),
     Dependency("Fontconfig_jll"),
-    Dependency("FreeType2_jll"; compat="2.10.4"),
+    Dependency("FreeType2_jll"; compat="2.13.1"),
     Dependency("FriBidi_jll"),
     Dependency("Glib_jll"; compat="2.68.1"),
     Dependency("HarfBuzz_jll"; compat="2.8.1"),
